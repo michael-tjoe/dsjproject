@@ -6,6 +6,7 @@ export interface ButtonProps {
   block?: boolean;
   children: ReactNode;
   primary?: boolean;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -13,12 +14,13 @@ function Button({
   block = false,
   children,
   primary,
+  className,
   onClick = noop,
 }: ButtonProps) {
   return (
     <button
       type="button"
-      className={styButton}
+      className={`${styButton} ${className}`}
       onClick={onClick}
       {...(primary && { "data-primary": true })}
       {...(block && { "data-block": true })}

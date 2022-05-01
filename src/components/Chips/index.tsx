@@ -1,7 +1,16 @@
 import { styChipContainer } from "./styles";
 
-function Chips({ label }) {
-  return <div className={styChipContainer}>{label}</div>;
+interface ChipsProps {
+  label: string;
+  onClick: () => void;
+}
+
+function Chips({ label, onClick }: ChipsProps) {
+  return (
+    <button type="button" onClick={onClick} className={styChipContainer}>
+      {label}
+    </button>
+  );
 }
 
 export default Chips;

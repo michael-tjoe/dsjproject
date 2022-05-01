@@ -1,9 +1,11 @@
 import { css } from "@emotion/css";
 import { body1 } from "@styles/typography";
-import { blackPrimary, smoke } from "@styles/variables/colors";
+import { blackPrimary, smoke, white } from "@styles/variables/colors";
 
 export const styChipContainer = css`
   ${body1};
+  background: ${white};
+  outline: none;
   display: flex;
   flex: 0;
   border-radius: 8px;

@@ -12,7 +12,7 @@ export const tag1 = css`
   ${tagStyle};
   font-size: 20px;
 
-  ${mq(LG)} {
+  ${mq(MD)} {
     font-size: 34px;
   }
 `;
@@ -41,7 +41,7 @@ export const body1 = css`
   font-size: 12px;
   line-height: 1.5715;
 
-  ${mq(LG)} {
+  ${mq(MD)} {
     font-size: 18px;
   }
 `;
@@ -50,13 +50,17 @@ export const body2 = css`
   font-size: 14px;
   line-height: 22px;
 
-  ${mq(LG)} {
+  ${mq(MD)} {
     font-size: 16px;
     line-height: 1.5715;
   }
 `;
 
 export const body3 = css`
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 10px;
+  line-height: 1.5715;
+
+  ${mq(MD)} {
+    font-size: 12px;
+  }
 `;

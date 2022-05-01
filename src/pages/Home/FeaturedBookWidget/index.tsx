@@ -5,9 +5,7 @@ import { styFeaturedBookWrapper } from "./styles";
 import Button from "@components/Button";
 
 function FeaturedBookWidget() {
-  const { isLoading, data, error } = useFetch(
-    `${BOOKS_API}?categoryId=1&size=1`
-  );
+  const { isLoading, data } = useFetch(`${BOOKS_API}?categoryId=1&size=1`);
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -20,15 +18,7 @@ function FeaturedBookWidget() {
     <section className={styFeaturedBookWrapper}>
       <div className="bg-circle" />
       <div className="book-cover">
-        {bookCover && (
-          <Image
-            alt=""
-            src={bookCover}
-            layout="fill"
-            height="600px"
-            width="400px"
-          />
-        )}
+        {bookCover && <Image alt="" src={bookCover} layout="fill" />}
       </div>
 
       <div className="book-info">

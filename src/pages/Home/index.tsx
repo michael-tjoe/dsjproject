@@ -3,6 +3,7 @@ import { CategoriesContext } from "@context/categories/categoriesContext";
 import CategoriesWidget from "./CategoriesWidget";
 import FeaturedBookWidget from "./FeaturedBookWidget";
 import { styHomePageWrapper } from "./styles";
+import RecommendationWidget from "./RecommendationWidget";
 
 function Home() {
   const { isCategoryLoading, categories } = useContext(CategoriesContext);
@@ -14,6 +15,7 @@ function Home() {
         categories={categories}
         isCategoryLoading={isCategoryLoading}
       />
+      <RecommendationWidget />
     </div>
   );
 }

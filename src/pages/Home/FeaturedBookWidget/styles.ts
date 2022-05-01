@@ -5,18 +5,20 @@ import { MD } from "@styles/variables/breakpoints";
 
 export const styFeaturedBookWrapper = css`
   position: relative;
-  width: 100%;
   border-radius: 8px;
+  margin: 0 -16px;
+  margin-top: 0;
   background-color: rgba(237, 231, 246, 0.4);
   display: grid;
-  grid: auto / 25% 1fr;
+  grid: auto / auto 1fr;
   grid-column-gap: 16px;
   padding: 12px 16px;
   align-items: center;
   overflow: hidden;
 
   ${mq(MD)} {
-    justify-content: center;
+    padding: 32px 48px;
+    grid-column-gap: 24px;
   }
 
   .bg-circle {
@@ -42,9 +44,11 @@ export const styFeaturedBookWrapper = css`
     overflow: hidden;
     aspect-ratio: 2 / 3;
     position: relative;
-    max-height: 240px;
-    margin: 0 auto;
-    width: 100%;
+    width: 100px;
+
+    ${mq(MD)} {
+      width: 180px;
+    }
   }
 
   .book-info {

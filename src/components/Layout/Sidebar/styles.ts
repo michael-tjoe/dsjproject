@@ -16,7 +16,7 @@ export const styAsideWrapper = css`
   height: calc(100% - 70px);
   transition: 0.2s ease-out;
   visibility: hidden;
-  
+
   &[data-open] {
     visibility: visible;
     opacity: 1;
@@ -34,34 +34,27 @@ export const styAsideWrapper = css`
   }
 
   > ul {
-    padding-top: 48px;
+    margin-top: 16px;
 
     > li {
       > a {
+        display: block;
+        width: 100%;
         position: relative;
         display: grid;
-        grid: auto / auto-flow 24px 1fr;
+        grid: auto / auto-flow 1fr;
         grid-column-gap: 16px;
         align-items: center;
         text-decoration: none;
-        padding: 16px 0;
+        padding: 16px;
 
-        p {
-          ${body2};
-          color: ${primary};
-          font-weight: 600;
-        }
-
-        .icon {
-          width: 24px;
-          height: 24px;
-          position: relative;
-        }
+        ${body2};
+        width: 100%;
+        color: ${primary};
+        font-weight: 600;
 
         &.active {
-          p {
-            color: ${primary};
-          }
+          color: ${primary};
         }
       }
     }

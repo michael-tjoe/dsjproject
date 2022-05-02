@@ -1,7 +1,9 @@
 import Head from "next/head";
 import HomeContainer from "@pages/Home";
+
 import Layout from "@components/Layout";
 import { BOOKS_API, CATEGORIES_API } from "@constants/api";
+
 import type { BookCategoryData, BookData } from "@src/types";
 
 interface HomePageProps {

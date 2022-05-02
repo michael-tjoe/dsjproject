@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import SidebarItem from "./SidebarItem";
 import { styAsideWrapper } from "./styles";
+import Link from "next/link";
 
 interface SidebarProps {
   display: boolean;
@@ -20,33 +21,19 @@ function Sidebar({ display, onClickMenu }: SidebarProps) {
     >
       <ul>
         <li>
-          <SidebarItem
-            onClick={onClickMenu}
-            path="/"
-            image="/icons/ic-home.svg"
-            title="Beranda"
-            isActive={currentPath === "/"}
-          />
+          <Link href="/">Home</Link>
         </li>
 
         <li>
-          <SidebarItem
-            onClick={onClickMenu}
-            path="/DriverManagement"
-            image="/icons/ic-user.svg"
-            title="Driver Management"
-            isActive={currentPath === "/DriverManagement"}
-          />
+          <Link href="/">Category</Link>
         </li>
 
         <li>
-          <SidebarItem
-            onClick={onClickMenu}
-            path="/Pickup"
-            image="/icons/ic-calendar.svg"
-            title="Pickup"
-            isActive={currentPath === "/Pickup"}
-          />
+          <Link href="/bookmark">Bookmark List</Link>
+        </li>
+
+        <li>
+          <Link href="/feedback">Feedback</Link>
         </li>
       </ul>
     </aside>

@@ -1,8 +1,10 @@
 import Head from "next/head";
 import CategoryPage from "@pages/Category";
+
 import Layout from "@components/Layout";
-import { BOOKS_API, CATEGORIES_API, PAGE_SIZE } from "@src/constants/api";
-import { BookCategoryData, BookData } from "@src/types";
+import { BOOKS_API, CATEGORIES_API, PAGE_SIZE } from "@constants/api";
+
+import type { BookCategoryData, BookData } from "@src/types";
 
 interface CategoryPageProps {
   initialData: Array<BookData>;

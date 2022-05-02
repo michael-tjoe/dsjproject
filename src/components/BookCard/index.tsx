@@ -1,8 +1,24 @@
-import { memo } from "react";
 import Image from "next/image";
 import { styBookCard } from "./styles";
+import noop from "@src/helpers/noop";
 
-function BookCard({ cover, title, author, withBookmark = false }) {
+interface BookCardProps {
+  cover: string;
+  title: string;
+  author: string;
+  withBookmark?: boolean;
+  isBookmarked?: boolean;
+  onClickBookmark: () => void;
+}
+
+function BookCard({
+  cover,
+  title,
+  author,
+  withBookmark = false,
+  isBookmarked = false,
+  onClickBookmark = noop,
+}: BookCardProps) {
   return (
     <div className={styBookCard}>
       <div className="book-cover">
@@ -11,19 +27,28 @@ function BookCard({ cover, title, author, withBookmark = false }) {
 
       <div className="book-detail">
         <div className="book-info">
-          <h2>{title}</h2>
+          <h2>
+            {title}
+            {isBookmarked.toString()}
+          </h2>
           <p>{author}</p>
         </div>
+
         {withBookmark && (
-          <div>
+          <div
+            className={isBookmarked ? "active" : ""}
+            onClick={onClickBookmark}
+          >
             <svg
-              enableBackground="new 0 0 512 512"
-              version="1.1"
-              viewBox="0 0 512 512"
-              xmlSpace="preserve"
               xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="#ffffff"
+              stroke="#000000"
+              className="bi bi-bookmark-fill"
+              viewBox="0 0 16 16"
             >
-              <path d="M70.715,0v512L256,326.715L441.285,512V0H70.715z M411.239,439.462L256,284.224L100.761,439.462V30.046h310.477V439.462z" />
+              <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
             </svg>
           </div>
         )}
@@ -32,4 +57,4 @@ function BookCard({ cover, title, author, withBookmark = false }) {
   );
 }
 
-export default memo(BookCard);
+export default BookCard;

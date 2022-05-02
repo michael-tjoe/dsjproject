@@ -32,8 +32,6 @@ const Home = ({ categories, bookRecommendations, error }: HomePageProps) => (
 
 export async function getServerSideProps() {
   try {
-    console.log("BOOKS_API: ", BOOKS_API);
-
     const res = await Promise.all([
       fetch(CATEGORIES_API),
       fetch(`${BOOKS_API}?categoryId=11&size=5`),

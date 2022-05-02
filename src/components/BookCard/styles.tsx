@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { primary } from "@src/styles/variables/colors";
 import { body1, body3 } from "@styles/typography";
 
 export const styBookCard = css`
@@ -19,10 +20,18 @@ export const styBookCard = css`
     column-gap: 16px;
     align-items: center;
 
-    svg {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
+    > div {
+      svg {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      &.active {
+        svg {
+          fill: ${primary};
+        }
+      }
     }
 
     .book-info {

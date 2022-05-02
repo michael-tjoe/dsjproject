@@ -1,14 +1,21 @@
 import Head from "next/head";
 import CategoryPage from "@pages/Category";
-import { BOOKS_API } from "@src/constants/api";
-import { BookData } from "@src/types";
+import Layout from "@components/Layout";
+import { BOOKS_API, CATEGORIES_API } from "@src/constants/api";
+import { BookCategoryData, BookData } from "@src/types";
 
 interface CategoryPageProps {
   initialData: Array<BookData>;
+  categories: Array<BookCategoryData>;
   error: boolean;
 }
 
-const Category = ({ initialData, error = false }: CategoryPageProps) => (
+const Category = ({
+  initialData,
+  categories,
+  selectedCategory,
+  error = false,
+}: CategoryPageProps) => (
   <>
     <Head>
       <title>Main Project</title>
@@ -17,7 +24,12 @@ const Category = ({ initialData, error = false }: CategoryPageProps) => (
       {error ? (
         <div>Failed to fetch api</div>
       ) : (
-        <CategoryPage initialData={initialData} />
+        <Layout>
+          <CategoryPage
+            selectedCategory={selectedCategory}
+            initialData={initialData}
+          />
+        </Layout>
       )}
     </div>
   </>
@@ -27,12 +39,21 @@ export async function getServerSideProps(context) {
   try {
     const { id } = context.query;
 
-    const res = await fetch(`${BOOKS_API}?categoryId=${id}&size=10`);
-    const data = await res.json();
+    const res = await Promise.all([
+      fetch(CATEGORIES_API),
+      fetch(`${BOOKS_API}?categoryId=${id}&page=0&size=10`),
+    ]);
+
+    let resJson = await Promise.all(res.map((e) => e.json()));
+    const categoryList = resJson?.[0] || [];
 
     return {
       props: {
-        initialData: data,
+        categories: categoryList,
+        initialData: resJson?.[1] || [],
+        selectedCategory: categoryList.find(
+          (category) => category.id === Number(id)
+        ),
       },
     };
   } catch (err) {

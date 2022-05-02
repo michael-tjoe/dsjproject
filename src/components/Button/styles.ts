@@ -28,6 +28,11 @@ export const styButton = css`
   color: ${blackPrimary};
   border-color: ${smoke};
   background-color: ${white};
+  justify-content: center;
+
+  &[data-block] {
+    width: 100%;
+  }
 
   &[data-primary] {
     color: ${white};

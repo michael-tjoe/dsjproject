@@ -1,5 +1,6 @@
 import Head from "next/head";
 import HomeContainer from "@pages/Home";
+import Layout from "@components/Layout";
 import { BOOKS_API, CATEGORIES_API } from "@constants/api";
 import type { BookCategoryData, BookData } from "@src/types";
 
@@ -18,10 +19,12 @@ const Home = ({ categories, bookRecommendations, error }: HomePageProps) => (
       {error ? (
         "Cant retrieve API"
       ) : (
-        <HomeContainer
-          categories={categories}
-          bookRecommendations={bookRecommendations}
-        />
+        <Layout>
+          <HomeContainer
+            categories={categories}
+            bookRecommendations={bookRecommendations}
+          />
+        </Layout>
       )}
     </div>
   </>
@@ -29,6 +32,8 @@ const Home = ({ categories, bookRecommendations, error }: HomePageProps) => (
 
 export async function getServerSideProps() {
   try {
+    console.log("BOOKS_API: ", BOOKS_API);
+
     const res = await Promise.all([
       fetch(CATEGORIES_API),
       fetch(`${BOOKS_API}?categoryId=11&size=5`),

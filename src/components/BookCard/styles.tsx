@@ -14,18 +14,31 @@ export const styBookCard = css`
     overflow: hidden;
   }
 
-  .book-info {
-    display: block;
+  .book-detail {
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
 
-    > h2 {
-      ${body1};
-      font-weight: bold;
-      margin-bottom: 4px;
+    svg {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
     }
 
-    > p {
-      ${body3};
-      opacity: 0.5;
+    .book-info {
+      flex-grow: 1;
+      display: block;
+
+      > h2 {
+        ${body1};
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      > p {
+        ${body3};
+        opacity: 0.5;
+      }
     }
   }
 `;

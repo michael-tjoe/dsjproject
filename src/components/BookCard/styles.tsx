@@ -18,10 +18,12 @@ export const styBookCard = css`
   .book-detail {
     display: flex;
     column-gap: 16px;
-    align-items: center;
+    align-items: start;
 
     > div {
       svg {
+        position: relative;
+        top: 8px;
         width: 16px;
         height: 16px;
         cursor: pointer;

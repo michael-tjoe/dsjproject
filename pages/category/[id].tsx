@@ -1,12 +1,13 @@
 import Head from "next/head";
 import CategoryPage from "@pages/Category";
 import Layout from "@components/Layout";
-import { BOOKS_API, CATEGORIES_API } from "@src/constants/api";
+import { BOOKS_API, CATEGORIES_API, PAGE_SIZE } from "@src/constants/api";
 import { BookCategoryData, BookData } from "@src/types";
 
 interface CategoryPageProps {
   initialData: Array<BookData>;
   categories: Array<BookCategoryData>;
+  selectedCategory: string;
   error: boolean;
 }
 
@@ -24,7 +25,7 @@ const Category = ({
       {error ? (
         <div>Failed to fetch api</div>
       ) : (
-        <Layout>
+        <Layout categories={categories}>
           <CategoryPage
             selectedCategory={selectedCategory}
             initialData={initialData}
@@ -41,7 +42,7 @@ export async function getServerSideProps(context) {
 
     const res = await Promise.all([
       fetch(CATEGORIES_API),
-      fetch(`${BOOKS_API}?categoryId=${id}&page=0&size=10`),
+      fetch(`${BOOKS_API}?categoryId=${id}&page=0&size=${PAGE_SIZE}`),
     ]);
 
     let resJson = await Promise.all(res.map((e) => e.json()));

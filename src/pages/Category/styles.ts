@@ -15,6 +15,7 @@ export const styCategoryWrapper = css`
     grid: auto / 1fr auto;
 
     ${mq(MD)} {
+      grid: auto / 400px auto;
       margin-top: 24px;
     }
   }

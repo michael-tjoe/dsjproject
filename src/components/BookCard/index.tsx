@@ -8,7 +8,8 @@ interface BookCardProps {
   author: string;
   withBookmark?: boolean;
   isBookmarked?: boolean;
-  onClickBookmark: () => void;
+  onClickBookmark?: () => void;
+  onDeleteBookmark?: () => void;
 }
 
 function BookCard({
@@ -18,7 +19,15 @@ function BookCard({
   withBookmark = false,
   isBookmarked = false,
   onClickBookmark = noop,
+  onDeleteBookmark = noop,
 }: BookCardProps) {
+  const handleClickBookmark = () => {
+    if (isBookmarked) {
+      onDeleteBookmark();
+    } else {
+      onClickBookmark();
+    }
+  };
   return (
     <div className={styBookCard}>
       <div className="book-cover">
@@ -27,17 +36,14 @@ function BookCard({
 
       <div className="book-detail">
         <div className="book-info">
-          <h2>
-            {title}
-            {isBookmarked.toString()}
-          </h2>
+          <h2>{title}</h2>
           <p>{author}</p>
         </div>
 
         {withBookmark && (
           <div
             className={isBookmarked ? "active" : ""}
-            onClick={onClickBookmark}
+            onClick={handleClickBookmark}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

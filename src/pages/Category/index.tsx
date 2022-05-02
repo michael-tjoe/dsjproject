@@ -23,12 +23,21 @@ function Category({ initialData, selectedCategory }) {
     [] as Array<BookData>
   );
 
+  console.log("bookmarkList: ", bookmarkList);
+
   const [books, setBooks] = useState<Array<BookData>>(initialData);
   const [isLoading, setIsLoading] = useState(false);
   const currentPage = useRef(0);
 
-  const hasMore = useRef(true);
   const lastPage = useRef(null);
+
+  useEffect(() => {
+    currentPage.current = 0;
+    lastPage.current = null;
+    setSearchKeyword("");
+    setBooks(initialData);
+    setIsLoading(false);
+  }, [initialData]);
 
   const handleBookmarkBook = (book: BookData) => {
     const isAlreadyExists = bookmarkList.find((bookmarkedBook: BookData) => {
@@ -41,8 +50,21 @@ function Category({ initialData, selectedCategory }) {
     if (isAlreadyExists) return;
 
     if (bookmarkList.length < MAX_STORAGE) {
+      alert("bookmarked!");
       setBookmarkList([...bookmarkList, book]);
+    } else {
+      alert(`Your storage is full  (${MAX_STORAGE})`);
     }
+  };
+
+  const handleDeleteBookmark = (book: BookData) => {
+    const result = bookmarkList.filter(
+      (bookmarkedBook) =>
+        bookmarkedBook.id !== book.id ||
+        bookmarkedBook.category_id !== book.category_id
+    );
+    alert("bookmark deleted");
+    setBookmarkList(result);
   };
 
   const handleFetchData = async () => {
@@ -55,7 +77,6 @@ function Category({ initialData, selectedCategory }) {
       );
 
       const data = await apiResponse.json();
-      hasMore.current = data.length >= PAGE_SIZE;
 
       setBooks(data);
 
@@ -152,6 +173,7 @@ function Category({ initialData, selectedCategory }) {
               withBookmark
               isBookmarked={Boolean(bookmarkedBook)}
               onClickBookmark={() => handleBookmarkBook(book)}
+              onDeleteBookmark={() => handleDeleteBookmark(book)}
             />
           );
         })}
@@ -159,7 +181,9 @@ function Category({ initialData, selectedCategory }) {
       <div className="cta">
         <Button
           className={`${
-            lastPage.current && currentPage.current >= lastPage.current
+            books.length < PAGE_SIZE ||
+            (lastPage.current !== null &&
+              currentPage.current >= lastPage.current)
               ? "invisible"
               : ""
           }`}

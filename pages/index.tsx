@@ -19,7 +19,7 @@ const Home = ({ categories, bookRecommendations, error }: HomePageProps) => (
       {error ? (
         "Cant retrieve API"
       ) : (
-        <Layout>
+        <Layout categories={categories}>
           <HomeContainer
             categories={categories}
             bookRecommendations={bookRecommendations}

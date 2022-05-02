@@ -1,9 +1,16 @@
+import { ReactNode, useState } from "react";
+import { BookCategoryData } from "@src/types";
 import { styContainer } from "@styles/base";
-import { useState } from "react";
+
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-function Layout({ children }) {
+interface LayoutProps {
+  categories: Array<BookCategoryData>;
+  children: ReactNode;
+}
+
+function Layout({ children, categories }: LayoutProps) {
   const [displaySidebar, setDisplaySidebar] = useState(false);
 
   const handleToggleSidebar = () => {
@@ -19,10 +26,15 @@ function Layout({ children }) {
   return (
     <>
       <Header
+        categories={categories}
         displayMobileNav={displaySidebar}
         onClickBurgerButton={handleToggleSidebar}
       />
-      <Sidebar onClickMenu={handleCloseSidebar} display={displaySidebar} />
+      <Sidebar
+        categories={categories}
+        onClickMenu={handleCloseSidebar}
+        display={displaySidebar}
+      />
       <main className={styContainer}>{children}</main>
     </>
   );

@@ -1,21 +1,15 @@
-import Chips from "@components/Chips";
-import { BookCategoryData } from "@context/categories/types";
-import { tag1 } from "@styles/typography";
 import { useRouter } from "next/router";
+import Chips from "@components/Chips";
+import { tag1 } from "@styles/typography";
+import type { BookCategoryData } from "@src/types";
 import { styBookCategories } from "./styles";
 
 interface CategoriesWidgetProps {
   categories: Array<BookCategoryData>;
-  isCategoryLoading: boolean;
 }
 
-function CategoriesWidget({
-  categories,
-  isCategoryLoading,
-}: CategoriesWidgetProps) {
+function CategoriesWidget({ categories }: CategoriesWidgetProps) {
   const router = useRouter();
-
-  if (isCategoryLoading) return <div>Loading</div>;
 
   return (
     <section className={styBookCategories}>

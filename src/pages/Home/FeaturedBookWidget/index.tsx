@@ -1,24 +1,21 @@
-import { BOOKS_API } from "@constants/api";
 import Image from "next/image";
-import useFetch from "@hooks/useFetch";
-import { styFeaturedBookWrapper } from "./styles";
 import Button from "@components/Button";
 
-function FeaturedBookWidget() {
-  const { isLoading, data } = useFetch(`${BOOKS_API}?categoryId=1&size=1`);
+import type { BookData } from "@src/types";
+import { styFeaturedBookWrapper } from "./styles";
 
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
+interface FeaturedBookWidgetProps {
+  book: BookData;
+}
 
-  const bookData = data?.[0] || {};
-  const bookCover = bookData?.cover_url || "";
+function FeaturedBookWidget({ book }: FeaturedBookWidgetProps) {
+  const cover = book.cover_url;
 
   return (
     <section className={styFeaturedBookWrapper}>
       <div className="bg-circle" />
       <div className="book-cover">
-        {bookCover && <Image alt="" src={bookCover} layout="fill" />}
+        <Image alt="" src={cover} layout="fill" />
       </div>
 
       <div className="book-info">

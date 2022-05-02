@@ -1,25 +1,26 @@
 import { BOOKS_API } from "@constants/api";
-import Image from "next/image";
 import useFetch from "@hooks/useFetch";
 import { styRecommendationWrapper } from "./styles";
 
 import { tag1 } from "@styles/typography";
 import BookCard from "@components/BookCard";
+import { BookData } from "@src/types";
 
-function RecommendationWidget() {
-  const { isLoading, data } = useFetch(`${BOOKS_API}?categoryId=11&size=5`);
+interface BookShowcaseProps {
+  books: Array<BookData>;
+  title: string;
+}
 
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
-
-  const bookData = data ?? [];
-
+function BookShowcase({
+  books = [],
+  title = "Popular Booku This Week",
+}: BookShowcaseProps) {
   return (
     <section className={styRecommendationWrapper}>
-      <h1 className={tag1}>Popular Booku This Week</h1>
+      <h1 className={tag1}>{title}</h1>
+
       <div className="slider">
-        {bookData.map((book) => {
+        {books.map((book) => {
           const bookId = book.id || 0;
           const title = book.title || "";
           const author = book.authors?.[0] || "";
@@ -39,4 +40,4 @@ function RecommendationWidget() {
   );
 }
 
-export default RecommendationWidget;
+export default BookShowcase;

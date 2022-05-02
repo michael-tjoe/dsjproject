@@ -17,7 +17,7 @@ export const styBookCategories = css`
     ${mq(MD)} {
       margin-top: 24px;
       column-gap: 16px;
-      row-gap: 15px;
+      row-gap: 16px;
     }
   }
 `;

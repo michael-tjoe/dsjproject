@@ -1,21 +1,36 @@
-import { useContext } from "react";
-import { CategoriesContext } from "@context/categories/categoriesContext";
-import CategoriesWidget from "./CategoriesWidget";
-import FeaturedBookWidget from "./FeaturedBookWidget";
-import { styHomePageWrapper } from "./styles";
-import RecommendationWidget from "./RecommendationWidget";
+import { useMemo } from "react";
+import type { BookCategoryData, BookData } from "@src/types";
 
-function Home() {
-  const { isCategoryLoading, categories } = useContext(CategoriesContext);
+import CategoriesWidget from "./CategoriesWidget";
+import BookShowcase from "./BookShowcase";
+import FeaturedBookWidget from "./FeaturedBookWidget";
+
+import { styHomePageWrapper } from "./styles";
+
+interface HomeProps {
+  categories: Array<BookCategoryData>;
+  bookRecommendations: Array<BookData>;
+}
+
+function Home({ categories, bookRecommendations }: HomeProps) {
+  const featuredBook = useMemo(() => {
+    const featuredIndex = Math.floor(
+      Math.random() * bookRecommendations.length
+    );
+
+    return bookRecommendations.find((_, index) => {
+      return index === featuredIndex;
+    });
+  }, [bookRecommendations]);
 
   return (
     <div className={styHomePageWrapper}>
-      <FeaturedBookWidget />
-      <CategoriesWidget
-        categories={categories}
-        isCategoryLoading={isCategoryLoading}
+      <FeaturedBookWidget book={featuredBook} />
+      <BookShowcase
+        title="Popular Booku This Week"
+        books={bookRecommendations}
       />
-      <RecommendationWidget />
+      <CategoriesWidget categories={categories} />
     </div>
   );
 }

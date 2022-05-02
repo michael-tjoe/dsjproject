@@ -6,9 +6,7 @@ import "@styles/global";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <CategoriesProvider>
-        <Component {...pageProps} />
-      </CategoriesProvider>
+      <Component {...pageProps} />
     </Layout>
   );
 }

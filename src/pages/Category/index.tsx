@@ -9,7 +9,7 @@ import useFetch from "@hooks/useFetch";
 import { BOOKS_API } from "@constants/api";
 import BookCard from "@components/BookCard";
 
-function Category() {
+function Category({ initialData }) {
   const router = useRouter();
   const { id } = router.query;
   const { categories } = useContext(CategoriesContext);

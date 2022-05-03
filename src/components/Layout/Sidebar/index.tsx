@@ -1,18 +1,16 @@
 import React from "react";
-import { useRouter } from "next/router";
-import SidebarItem from "./SidebarItem";
-import { styAsideWrapper } from "./styles";
 import Link from "next/link";
+
+import type { BookCategoryData } from "@src/types";
+import { styAsideWrapper } from "./styles";
 
 interface SidebarProps {
   display: boolean;
+  categories: Array<BookCategoryData>;
   onClickMenu: () => void;
 }
 
-function Sidebar({ display, onClickMenu }: SidebarProps) {
-  const router = useRouter();
-  const currentPath = router.pathname;
-
+function Sidebar({ display, categories, onClickMenu }: SidebarProps) {
   return (
     <aside
       data-testid="shipperSidebar"
@@ -25,7 +23,14 @@ function Sidebar({ display, onClickMenu }: SidebarProps) {
         </li>
 
         <li>
-          <Link href="/">Category</Link>
+          <p>Category</p>
+          <ul className="submenu">
+            {categories.map((category) => (
+              <li onClick={onClickMenu} key={category.id}>
+                <Link href={`/category/${category.id}`}>{category.name}</Link>
+              </li>
+            ))}
+          </ul>
         </li>
 
         <li>

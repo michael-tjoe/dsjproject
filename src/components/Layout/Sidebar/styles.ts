@@ -37,7 +37,15 @@ export const styAsideWrapper = css`
     margin-top: 16px;
 
     > li {
-      > a {
+      > .submenu {
+        display: flex;
+        flex-direction: column;
+        padding-left: 32px;
+        margin-bottom: 16px;
+      }
+
+      a,
+      p {
         display: block;
         width: 100%;
         position: relative;

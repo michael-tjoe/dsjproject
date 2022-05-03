@@ -23,7 +23,6 @@ function Category({ initialData, selectedCategory }) {
     [] as Array<BookData>
   );
 
-  console.log("bookmarkList: ", bookmarkList);
 
   const [books, setBooks] = useState<Array<BookData>>(initialData);
   const [isLoading, setIsLoading] = useState(false);
